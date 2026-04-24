@@ -2,7 +2,9 @@
 
 <template>
   <header></header>
-  <main></main>
+  <main>
+    <h1>Horse Racing</h1>
+  </main>
 </template>
 
 <style scoped></style>
