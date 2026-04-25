@@ -46,18 +46,14 @@ import AppButton from '@/components/Button/AppButton.component.vue'
   }
 
   @include respond-to(md) {
-    .header-container {
-      padding: 0.25rem 0.5rem;
-
-      &__logo-container {
-        gap: 0.5rem;
-        &__logo {
-          width: 24px;
-          height: 24px;
-        }
-        &__title {
-          font-size: var(--text-base);
-        }
+    &__logo-container {
+      gap: 0.5rem;
+      &__logo {
+        width: 24px;
+        height: 24px;
+      }
+      &__title {
+        font-size: var(--text-base);
       }
     }
   }
