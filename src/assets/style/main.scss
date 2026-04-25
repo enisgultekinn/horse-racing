@@ -5,7 +5,8 @@
 @use './base/_general.scss';
 
 // Shared SCSS
-@use './shared/utilities.scss';
+@use './shared/_utilities.scss';
+@use './shared/_support.scss';
 
 // Variables SCSS
 @use './variables/_colors.scss';
