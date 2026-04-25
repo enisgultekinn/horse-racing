@@ -5,16 +5,23 @@
       <h1 class="app-header__title">Horse Racing</h1>
     </div>
 
-    <AppButton variant="primary" size="md">Generate Race</AppButton>
+    <AppButton variant="primary" size="md" @click="generateRace">Generate Race</AppButton>
   </header>
 </template>
 
 <script setup lang="ts">
 import AppButton from '@/components/Button/AppButton.component.vue'
+import { useRaceStore } from '@/stores/race.store'
+
+const raceStore = useRaceStore()
+
+function generateRace() {
+  raceStore.generateRace()
+}
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/style/shared/mixins.scss' as *;
+@use '@/assets/style/shared/_mixins.scss' as *;
 
 .app-header {
   display: flex;

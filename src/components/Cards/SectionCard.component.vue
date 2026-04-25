@@ -1,7 +1,9 @@
 <template>
   <div class="section-card">
     <span class="section-card__title">{{ title }}</span>
-    <slot />
+    <div class="section-card__body hide-scrollbar">
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -22,11 +24,21 @@ const { title } = defineProps<Props>()
   flex-direction: column;
   max-height: 100%;
   height: 100%;
+  min-height: 0;
+  overflow: hidden;
 
   &__title {
     font-size: var(--text-base);
     font-weight: 600;
     color: var(--color-neutral-900);
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+  }
+
+  &__body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
   }
 }
 </style>
