@@ -9,7 +9,7 @@
       <h1 class="header-container__logo-container__title">Horse Racing</h1>
     </div>
 
-    <AppButton variant="secondary" size="md">Generate Race</AppButton>
+    <AppButton variant="primary" size="md">Generate Race</AppButton>
   </header>
 </template>
 
@@ -25,7 +25,7 @@ import AppButton from '@/components/Button/AppButton.component.vue'
   justify-content: space-between;
   align-items: center;
   border-radius: 0.5rem;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
   padding: 0.5rem 1rem;
 
   &__logo-container {
@@ -34,25 +34,25 @@ import AppButton from '@/components/Button/AppButton.component.vue'
     align-items: center;
     gap: 1rem;
 
+    @include respond-to(md) {
+      gap: 0.5rem;
+    }
+
     &__logo {
       width: 48px;
       height: 48px;
+
+      @include respond-to(md) {
+        width: 24px;
+        height: 24px;
+      }
     }
 
     &__title {
       font-weight: 600;
       font-size: var(--text-xl);
-    }
-  }
 
-  @include respond-to(md) {
-    &__logo-container {
-      gap: 0.5rem;
-      &__logo {
-        width: 24px;
-        height: 24px;
-      }
-      &__title {
+      @include respond-to(md) {
         font-size: var(--text-base);
       }
     }
