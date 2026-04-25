@@ -20,8 +20,6 @@ const { variant = 'primary', type = 'button', disabled = false, size = 'md' } = 
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/style/shared/mixins.scss' as *;
-
 .button {
   display: flex;
   align-items: center;
@@ -29,7 +27,10 @@ const { variant = 'primary', type = 'button', disabled = false, size = 'md' } = 
   font-weight: 500;
   cursor: pointer;
   user-select: none;
-  transition: opacity 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 
   &--sm {
     padding: 0.5rem 1rem;

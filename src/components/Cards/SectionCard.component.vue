@@ -14,7 +14,6 @@ const { title } = defineProps<Props>()
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/style/shared/mixins.scss' as *;
 .section-card {
   border-radius: 0.5rem;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);

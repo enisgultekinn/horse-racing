@@ -1,12 +1,8 @@
 <template>
-  <header class="header-container">
-    <div class="header-container__logo-container">
-      <img
-        src="../../assets/images/logo.svg"
-        alt="Horse Racing"
-        class="header-container__logo-container__logo"
-      />
-      <h1 class="header-container__logo-container__title">Horse Racing</h1>
+  <header class="app-header">
+    <div class="app-header__brand">
+      <img src="@/assets/images/logo.svg" alt="Horse Racing" class="app-header__logo" />
+      <h1 class="app-header__title">Horse Racing</h1>
     </div>
 
     <AppButton variant="primary" size="md">Generate Race</AppButton>
@@ -19,7 +15,8 @@ import AppButton from '@/components/Button/AppButton.component.vue'
 
 <style scoped lang="scss">
 @use '@/assets/style/shared/mixins.scss' as *;
-.header-container {
+
+.app-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -28,7 +25,7 @@ import AppButton from '@/components/Button/AppButton.component.vue'
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
   padding: 0.5rem 1rem;
 
-  &__logo-container {
+  &__brand {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -37,24 +34,24 @@ import AppButton from '@/components/Button/AppButton.component.vue'
     @include respond-to(md) {
       gap: 0.5rem;
     }
+  }
 
-    &__logo {
-      width: 48px;
-      height: 48px;
+  &__logo {
+    width: 48px;
+    height: 48px;
 
-      @include respond-to(md) {
-        width: 24px;
-        height: 24px;
-      }
+    @include respond-to(md) {
+      width: 24px;
+      height: 24px;
     }
+  }
 
-    &__title {
-      font-weight: 600;
-      font-size: var(--text-xl);
+  &__title {
+    font-weight: 700;
+    font-size: var(--text-xl);
 
-      @include respond-to(md) {
-        font-size: var(--text-base);
-      }
+    @include respond-to(md) {
+      font-size: var(--text-base);
     }
   }
 }
