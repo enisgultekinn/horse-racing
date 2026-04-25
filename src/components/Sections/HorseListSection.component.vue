@@ -11,22 +11,22 @@
         <span class="horse-list__color" :style="{ backgroundColor: horse.color }" />
         {{ horse.name }}</span
       >
-      <span>{{ horse.condition }}%</span>
+      <span class="horse-list__condition">{{ horse.condition }}%</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useHorseStore } from '@/stores/horse.store'
-import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
 
 const horseStore = useHorseStore()
 
-const horses = computed(() => horseStore.horses)
+const { horses } = storeToRefs(horseStore)
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/style/shared/_mixins.scss' as *;
+@use '@/assets/style/shared/mixins' as *;
 
 .horse-list {
   display: flex;
@@ -35,7 +35,7 @@ const horses = computed(() => horseStore.horses)
   border: 1px solid var(--color-neutral-200);
   border-radius: 0.5rem;
   font-size: var(--text-sm);
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-neutral-950);
   overflow: hidden;
 
@@ -46,7 +46,7 @@ const horses = computed(() => horseStore.horses)
   &__header,
   &__item {
     display: grid;
-    grid-template-columns: 3rem 1fr auto;
+    grid-template-columns: 2rem 1fr auto;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
   }
@@ -68,6 +68,10 @@ const horses = computed(() => horseStore.horses)
     border-radius: 50%;
     display: inline-block;
     margin-right: 0.5rem;
+  }
+
+  &__condition {
+    font-weight: 800;
   }
 }
 </style>

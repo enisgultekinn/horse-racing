@@ -1,13 +1,13 @@
 // Reset SCSS
-@use './base/_resets.scss';
+@use './base/resets';
 
 // General SCSS
-@use './base/_general.scss';
+@use './base/general';
 
 // Shared SCSS
-@use './shared/_utilities.scss';
-@use './shared/_support.scss';
+@use './shared/utilities';
+@use './shared/support';
 
 // Variables SCSS
-@use './variables/_colors.scss';
-@use './variables/_font-size.scss';
+@use './variables/colors';
+@use './variables/font-size';
