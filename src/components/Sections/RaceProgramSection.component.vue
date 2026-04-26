@@ -1,7 +1,15 @@
 <template>
   <div v-if="rounds.length > 0" class="race-program">
-    <div v-for="round in rounds" :key="round._id" class="race-program__round">
-      <div class="race-program__round-title">{{ round.round }}. Round - {{ round.distance }}m</div>
+    <div
+      v-for="round in rounds"
+      :key="round._id"
+      :data-round-id="round._id"
+      class="race-program__round"
+    >
+      <div class="race-program__round-title">
+        <span>{{ round.round }}. Round - {{ round.distance }}m</span>
+        <span v-if="round.status === 'running'" class="race-program__pulse" />
+      </div>
       <div class="race-program__header">
         <span>Pos.</span>
         <span>Name</span>
@@ -24,6 +32,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { nextTick, watch } from 'vue'
 
 //stores
 import { useRaceStore } from '@/stores/race.store'
@@ -33,7 +42,19 @@ import EmptyList from '@/components/List/EmptyList.component.vue'
 
 const raceStore = useRaceStore()
 
-const { rounds } = storeToRefs(raceStore)
+const { rounds, currentRound } = storeToRefs(raceStore)
+
+watch(
+  currentRound,
+  async (round) => {
+    if (!round) return
+    await nextTick()
+    document
+      .querySelector(`[data-round-id="${round._id}"]`)
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  },
+  { immediate: true },
+)
 </script>
 
 <style scoped lang="scss">
@@ -52,14 +73,35 @@ const { rounds } = storeToRefs(raceStore)
     border: 1px solid var(--color-neutral-200);
     border-radius: 0.5rem;
     overflow: hidden;
+    transition:
+      opacity 0.3s ease,
+      filter 0.3s ease;
+
+    &--finished {
+      opacity: 0.5;
+      filter: grayscale(0.4);
+    }
   }
 
   &__round-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     padding: 0.5rem 0.75rem;
     background-color: var(--color-neutral-900);
     color: var(--color-neutral-50);
     font-size: var(--text-xs);
     font-weight: 600;
+  }
+
+  &__pulse {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: var(--color-green-500);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    animation: race-program-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    flex-shrink: 0;
   }
 
   &__header,
@@ -99,6 +141,18 @@ const { rounds } = storeToRefs(raceStore)
     border-radius: 50%;
     display: inline-block;
     margin-right: 0.5rem;
+  }
+}
+
+@keyframes race-program-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 0.5rem rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
   }
 }
 </style>
