@@ -5,11 +5,15 @@
       <h1 class="app-header__title">Horse Racing</h1>
     </div>
 
-    <AppButton variant="primary" size="md" @click="generateRace">Generate Race</AppButton>
+    <AppButton variant="primary" size="md" :disabled="isRoundActive" @click="generateRace">
+      Generate Race
+    </AppButton>
   </header>
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
+
 //components
 import AppButton from '@/components/Button/AppButton.component.vue'
 
@@ -17,6 +21,8 @@ import AppButton from '@/components/Button/AppButton.component.vue'
 import { useRaceStore } from '@/stores/race.store'
 
 const raceStore = useRaceStore()
+
+const { isRoundActive } = storeToRefs(raceStore)
 
 function generateRace() {
   raceStore.generateRace()

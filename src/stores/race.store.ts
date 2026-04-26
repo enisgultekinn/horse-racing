@@ -14,7 +14,13 @@ export const useRaceStore = defineStore('race', () => {
   const currentRoundIndex = ref(0)
   const currentRound = computed<RaceRound | undefined>(() => rounds.value[currentRoundIndex.value])
 
+  const isRoundActive = computed(() =>
+    rounds.value.some((round) => round.status === 'running' || round.status === 'paused'),
+  )
+
   function generateRace() {
+    if (isRoundActive.value) return
+
     horseStore.generateHorses()
 
     rounds.value = RACE_DISTANCES.map((distance, i) => {
@@ -85,6 +91,7 @@ export const useRaceStore = defineStore('race', () => {
     currentRound,
     rounds,
     currentRoundIndex,
+    isRoundActive,
     generateRace,
     startRound,
     pauseRound,
