@@ -5,6 +5,9 @@
       :key="round._id"
       :data-round-id="round._id"
       class="race-program__round"
+      :class="{
+        'race-program__round--finished': round.status === 'finished',
+      }"
     >
       <div class="race-program__round-title">
         <span>{{ round.round }}. Round - {{ round.distance }}m</span>

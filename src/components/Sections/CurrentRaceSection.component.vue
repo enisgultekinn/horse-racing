@@ -11,7 +11,9 @@
       </div>
       <div class="race-info__group">
         <span class="race-info__label">Horses</span>
-        <span class="race-info__value">{{ currentRound.horses.length }} / 10</span>
+        <span class="race-info__value"
+          >{{ currentRound.horses.length }} / {{ HORSES_PER_ROUND }}</span
+        >
       </div>
       <div class="race-info__actions">
         <AppButton
@@ -59,6 +61,7 @@ import EmptyList from '@/components/List/EmptyList.component.vue'
 
 //stores
 import { useRaceStore } from '@/stores/race.store'
+import { HORSES_PER_ROUND } from '@/constants/race.constants'
 
 const raceStore = useRaceStore()
 

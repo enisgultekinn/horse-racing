@@ -1,10 +1,10 @@
 <template>
-  <div class="section-card">
+  <section class="section-card">
     <span class="section-card__title">{{ title }}</span>
     <div class="section-card__body hide-scrollbar">
       <slot />
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
