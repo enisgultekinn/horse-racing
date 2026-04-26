@@ -31,7 +31,6 @@ const { horses } = storeToRefs(horseStore)
 .horse-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   border: 1px solid var(--color-neutral-200);
   border-radius: 0.5rem;
   font-size: var(--text-sm);
@@ -47,19 +46,26 @@ const { horses } = storeToRefs(horseStore)
   &__item {
     display: grid;
     grid-template-columns: 2rem 1fr auto;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem;
   }
 
   &__header {
     border-bottom: 1px solid var(--color-neutral-200);
-    background-color: var(--color-neutral-100);
+    background-color: var(--color-neutral-950);
     font-size: var(--text-xs);
-    color: var(--color-neutral-500);
+    color: var(--color-neutral-200);
   }
 
-  &__item:not(:last-child) {
-    border-bottom: 1px solid var(--color-neutral-200);
+  &__item {
+    background-color: var(--color-neutral-50);
+
+    &:nth-child(odd) {
+      background-color: var(--color-neutral-200);
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--color-neutral-200);
+    }
   }
 
   &__color {
