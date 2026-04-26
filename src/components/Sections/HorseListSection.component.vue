@@ -1,5 +1,5 @@
 <template>
-  <div class="horse-list">
+  <div v-if="horses.length > 0" class="horse-list">
     <div class="horse-list__header">
       <span>No.</span>
       <span>Name</span>
@@ -14,11 +14,20 @@
       <span class="horse-list__condition">{{ horse.condition }}%</span>
     </div>
   </div>
+  <div v-else>
+    <EmptyList message="No horses found." />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { useHorseStore } from '@/stores/horse.store'
 import { computed } from 'vue'
+
+//components
+import EmptyList from '@/components/List/EmptyList.component.vue'
+
+//stores
+import { useHorseStore } from '@/stores/horse.store'
+
 const horseStore = useHorseStore()
 
 const horses = computed(() => [...horseStore.horses].sort((a, b) => a._id - b._id))

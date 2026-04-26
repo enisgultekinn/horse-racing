@@ -1,5 +1,5 @@
 <template>
-  <div class="race-program">
+  <div v-if="rounds.length > 0" class="race-program">
     <div v-for="round in rounds" :key="round._id" class="race-program__round">
       <div class="race-program__round-title">{{ round.round }}. Round - {{ round.distance }}m</div>
       <div class="race-program__header">
@@ -17,11 +17,19 @@
       </div>
     </div>
   </div>
+  <div v-else>
+    <EmptyList message="No race program found." />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { useRaceStore } from '@/stores/race.store'
 import { storeToRefs } from 'pinia'
+
+//stores
+import { useRaceStore } from '@/stores/race.store'
+
+//components
+import EmptyList from '@/components/List/EmptyList.component.vue'
 
 const raceStore = useRaceStore()
 

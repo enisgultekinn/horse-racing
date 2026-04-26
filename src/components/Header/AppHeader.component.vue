@@ -10,7 +10,10 @@
 </template>
 
 <script setup lang="ts">
+//components
 import AppButton from '@/components/Button/AppButton.component.vue'
+
+//stores
 import { useRaceStore } from '@/stores/race.store'
 
 const raceStore = useRaceStore()

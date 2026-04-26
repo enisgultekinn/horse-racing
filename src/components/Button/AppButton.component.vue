@@ -24,7 +24,7 @@ const { variant = 'primary', type = 'button', disabled = false, size = 'md' } = 
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   user-select: none;
   transition:
@@ -35,13 +35,11 @@ const { variant = 'primary', type = 'button', disabled = false, size = 'md' } = 
   &--sm {
     padding: 0.5rem 1rem;
     font-size: var(--text-xs);
-    line-height: var(--text-xs--line-height);
     border-radius: 0.375rem;
   }
 
   &--md {
     font-size: var(--text-sm);
-    line-height: var(--text-sm--line-height);
     padding: 0.5rem 1rem;
     border-radius: 0.375rem;
   }
@@ -49,7 +47,6 @@ const { variant = 'primary', type = 'button', disabled = false, size = 'md' } = 
   &--lg {
     padding: 0.75rem 1.5rem;
     font-size: var(--text-lg);
-    line-height: var(--text-lg--line-height);
     border-radius: 0.625rem;
   }
 

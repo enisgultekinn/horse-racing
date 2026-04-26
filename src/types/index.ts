@@ -5,9 +5,19 @@ export interface Horse {
   condition: number
 }
 
+export interface RaceHorse extends Horse {
+  duration: number
+  easing: string
+  finished: boolean
+}
+
 export interface RaceRound {
-  _id: number
+  _id: string
   round: number
   distance: number
-  horses: Horse[]
+  horses: RaceHorse[]
+  status: RaceRoundStatus
+  results: number[]
 }
+
+export type RaceRoundStatus = 'idle' | 'paused' | 'running' | 'finished'
