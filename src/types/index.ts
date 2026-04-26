@@ -4,3 +4,10 @@ export interface Horse {
   color: string
   condition: number
 }
+
+export interface RaceRound {
+  _id: number
+  round: number
+  distance: number
+  horses: Horse[]
+}

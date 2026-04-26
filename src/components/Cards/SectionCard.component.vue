@@ -19,7 +19,7 @@ const { title } = defineProps<Props>()
 .section-card {
   border-radius: 0.5rem;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
   display: flex;
   flex-direction: column;
   max-height: 100%;

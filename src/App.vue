@@ -1,10 +1,7 @@
-<script setup lang="ts"></script>
-
 <template>
-  <header></header>
-  <main>
-    <h1>Horse Racing</h1>
-  </main>
+  <MainLayout />
 </template>
 
-<style scoped></style>
+<script setup lang="ts">
+import MainLayout from './layouts/MainLayout.vue'
+</script>

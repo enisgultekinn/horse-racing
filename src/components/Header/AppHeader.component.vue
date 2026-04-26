@@ -21,7 +21,7 @@ function generateRace() {
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/style/shared/_mixins.scss' as *;
+@use '@/assets/style/shared/mixins' as *;
 
 .app-header {
   display: flex;

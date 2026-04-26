@@ -18,11 +18,10 @@
 
 <script setup lang="ts">
 import { useHorseStore } from '@/stores/horse.store'
-import { storeToRefs } from 'pinia'
-
+import { computed } from 'vue'
 const horseStore = useHorseStore()
 
-const { horses } = storeToRefs(horseStore)
+const horses = computed(() => [...horseStore.horses].sort((a, b) => a._id - b._id))
 </script>
 
 <style scoped lang="scss">
@@ -37,6 +36,7 @@ const { horses } = storeToRefs(horseStore)
   font-weight: 500;
   color: var(--color-neutral-950);
   overflow: hidden;
+  margin-bottom: 1rem;
 
   @include respond-to(md) {
     font-size: var(--text-xs);
@@ -60,7 +60,7 @@ const { horses } = storeToRefs(horseStore)
     background-color: var(--color-neutral-50);
 
     &:nth-child(odd) {
-      background-color: var(--color-neutral-200);
+      background-color: var(--color-neutral-100);
     }
 
     &:not(:last-child) {
