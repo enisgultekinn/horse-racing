@@ -14,7 +14,7 @@
       <span class="horse-list__condition">{{ horse.condition }}%</span>
     </div>
   </div>
-  <div v-else>
+  <div v-else style="padding-bottom: 1rem">
     <EmptyList message="No horses found." />
   </div>
 </template>

@@ -17,7 +17,7 @@
       </div>
     </div>
   </div>
-  <div v-else>
+  <div v-else style="padding-bottom: 1rem">
     <EmptyList message="No results found." />
   </div>
 </template>

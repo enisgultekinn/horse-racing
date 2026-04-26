@@ -45,6 +45,8 @@ function onAnimationEnd() {
 </script>
 
 <style scoped lang="scss">
+@use '@/assets/style/shared/mixins' as *;
+
 .race-lane {
   display: flex;
   flex-direction: row;
@@ -65,6 +67,11 @@ function onAnimationEnd() {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+
+    @include respond-to(md) {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 
   &__track {

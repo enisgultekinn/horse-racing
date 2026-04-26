@@ -1,5 +1,5 @@
 <template>
-  <div v-if="currentRound">
+  <div v-if="currentRound" style="padding-bottom: 1rem">
     <div class="race-info">
       <div class="race-info__group">
         <span class="race-info__label">Round</span>
@@ -43,7 +43,7 @@
       </span>
     </div>
   </div>
-  <div v-else>
+  <div v-else style="padding-bottom: 1rem">
     <EmptyList
       message="No race in progress. You can start a new race by clicking the 'Generate Race' button."
     />
@@ -105,11 +105,24 @@ function onActionClick() {
   padding: 1rem;
   gap: 3rem;
 
+  @include respond-to(md) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
   &__group {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.25rem;
+
+    @include respond-to(md) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
   }
 
   &__label {
@@ -126,6 +139,10 @@ function onActionClick() {
 
   &__actions {
     margin-left: auto;
+
+    @include respond-to(md) {
+      margin-left: 0;
+    }
   }
 }
 

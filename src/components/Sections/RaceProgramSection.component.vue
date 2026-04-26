@@ -28,7 +28,7 @@
       </div>
     </div>
   </div>
-  <div v-else>
+  <div v-else style="padding-bottom: 1rem">
     <EmptyList message="No race program found." />
   </div>
 </template>
@@ -51,6 +51,7 @@ watch(
   currentRound,
   async (round) => {
     if (!round) return
+    if (window.matchMedia('(max-width: 1280px)').matches) return
     await nextTick()
     document
       .querySelector(`[data-round-id="${round._id}"]`)
