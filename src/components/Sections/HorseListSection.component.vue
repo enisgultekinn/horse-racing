@@ -7,7 +7,7 @@
     </div>
     <div class="horse-list__item" v-for="horse in horses" :key="horse._id">
       <span>{{ horse._id }}</span>
-      <span>
+      <span class="horse-list__name">
         <span class="horse-list__color" :style="{ backgroundColor: horse.color }" />
         {{ horse.name }}</span
       >
@@ -47,10 +47,6 @@ const horses = computed(() => [...horseStore.horses].sort((a, b) => a._id - b._i
   overflow: hidden;
   margin-bottom: 1rem;
 
-  @include respond-to(md) {
-    font-size: var(--text-xs);
-  }
-
   &__header,
   &__item {
     display: grid;
@@ -63,6 +59,12 @@ const horses = computed(() => [...horseStore.horses].sort((a, b) => a._id - b._i
     background-color: var(--color-neutral-950);
     font-size: var(--text-xs);
     color: var(--color-neutral-200);
+  }
+
+  &__name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__item {

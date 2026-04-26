@@ -1,4 +1,4 @@
-$breakpoint: 1024px;
+$breakpoint: 1280px;
 
 @mixin respond-to($size) {
   @if $size == md {

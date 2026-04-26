@@ -3,13 +3,13 @@
     <div v-for="round in rounds" :key="round._id" class="race-program__round">
       <div class="race-program__round-title">{{ round.round }}. Round - {{ round.distance }}m</div>
       <div class="race-program__header">
-        <span>Position</span>
+        <span>Pos.</span>
         <span>Name</span>
         <span>No</span>
       </div>
       <div v-for="(horse, index) in round.horses" :key="horse._id" class="race-program__item">
         <span>{{ index + 1 }}</span>
-        <span>
+        <span class="race-program__name">
           <span class="race-program__color" :style="{ backgroundColor: horse.color }" />
           {{ horse.name }}
         </span>
@@ -48,10 +48,6 @@ const { rounds } = storeToRefs(raceStore)
   color: var(--color-neutral-950);
   margin-bottom: 1rem;
 
-  @include respond-to(md) {
-    font-size: var(--text-xs);
-  }
-
   &__round {
     border: 1px solid var(--color-neutral-200);
     border-radius: 0.5rem;
@@ -69,8 +65,14 @@ const { rounds } = storeToRefs(raceStore)
   &__header,
   &__item {
     display: grid;
-    grid-template-columns: 4rem 1fr auto;
+    grid-template-columns: 3rem 1fr auto;
     padding: 0.5rem 0.75rem;
+  }
+
+  &__name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__header {
