@@ -25,14 +25,14 @@ Single Cypress spec: `bunx cypress run --spec cypress/e2e/example.cy.ts` (server
 - App shell: [src/App.vue](src/App.vue) just renders [src/layouts/MainLayout.vue](src/layouts/MainLayout.vue), which composes the page from `SectionCard`-wrapped sections (`HorseListSection`, `CurrentRaceSection`, `RaceProgramSection`, `ResultsSection`) plus `AppHeader`.
 - State: Pinia stores live in [src/stores/](src/stores/) and use the **setup-store** form (`defineStore('name', () => { ... })`). Files are named `<domain>.store.ts`. Current stores:
   - [horse.store.ts](src/stores/horse.store.ts) — generates the horse pool with randomized condition.
-  - [race.store.ts](src/stores/race.store.ts) — owns `rounds`, `currentRoundIndex`, and round lifecycle (`generateRace`, `startRound`, `pauseRound`, `nextRound`, `markHorseFinished`). Round status flows `idle → running ↔ paused → finished`.
+  - [race.store.ts](src/stores/race.store.ts) — owns `rounds`, `currentRoundIndex`, and round lifecycle (`generateRace`, `startRound`, `pauseRound`, `nextRound`, `markHorseFinished`). Round status flows `idle → running ↔ paused → finished`. Exposes status flags (`isRunning`, `isPaused`, `isFinished`) derived from the current round's status, plus `isRaceFinished` (true once every round is finished).
 - Domain types live in [src/types/index.ts](src/types/index.ts) (`Horse`, `RaceHorse`, `RaceRound`, `RaceRoundStatus`).
 - Constants live in [src/constants/](src/constants/) (`horse.constants.ts`, `race.constants.ts`) — keep magic values (horse roster, race distances, easings, horses-per-round) here, not inline.
 - Utilities live in [src/utils/](src/utils/) (`array.ts`, `random.ts`, `race.ts`, `time.ts`). `race.ts#getRaceHorses` is where per-horse animation `duration`/`easing` is computed from condition + distance.
 - Components are organized by role under [src/components/](src/components/): `Header/`, `Sections/`, `Cards/`, `Button/`, `Item/`, `List/`. Filenames use `<Name>.component.vue`. Icons are SFCs under [src/assets/icons/](src/assets/icons/).
 - Path alias: `@/*` → `./src/*` (configured in both [vite.config.ts](vite.config.ts) and [tsconfig.app.json](tsconfig.app.json)). Prefer `@/...` imports over long relative paths.
 - TS config is split: `tsconfig.app.json` for app code (excludes `__tests__`), `tsconfig.vitest.json` for unit tests, `tsconfig.node.json` for build tooling. `noUncheckedIndexedAccess` is on — array/object index access returns `T | undefined`, handle accordingly.
-- Tests colocate under `src/**/__tests__/` (excluded from the app tsconfig; picked up by Vitest). The `src/components/__tests__/` directory currently exists but is empty.
+- Tests colocate under `src/**/__tests__/` (excluded from the app tsconfig; picked up by Vitest). Unit tests cover utils ([src/utils/__tests__/](src/utils/__tests__/)), Pinia stores ([src/stores/__tests__/](src/stores/__tests__/)), and components ([src/components/__tests__/](src/components/__tests__/)). Component tests use `@vue/test-utils` `mount` and reset Pinia per test via `setActivePinia(createPinia())` in a `beforeEach`. Test files are named `<name>.test.ts`.
 
 ## Styling
 
