@@ -12,7 +12,7 @@ Vue 3 (Composition API, `<script setup lang="ts">`) + Vite + Pinia + TypeScript.
 - `bun run build` — runs `type-check` (via `vue-tsc --build`) and `build-only` (Vite build) in parallel
 - `bun run type-check` — type-check only, no emit
 - `bun test:unit` — Vitest (watch mode by default; pass `--run` for single-shot, or a path/name pattern to filter). Excludes `*.visual.test.ts`.
-- `bun test:visual` — Vitest Browser Mode (Playwright/Chromium, headless). Compares component renders against committed PNG baselines under `src/components/__tests__/__screenshots__/`.
+- `bun test:visual` — Vitest Browser Mode (Playwright/Chromium, headless). Compares component renders against local PNG baselines under `src/components/__tests__/__screenshots__/` (gitignored — see the visual-tests note below).
 - `bun test:visual:update` — re-seed baselines (run after intentional UI changes; review the diff before committing).
 - `bun test:e2e:dev` — Cypress against the Vite dev server (fast, for local iteration)
 - `bun test:e2e` — Cypress against `vite preview` of a production build (run `bun run build` first; this is what CI should use)
@@ -30,7 +30,7 @@ Single Cypress spec: `bunx cypress run --spec cypress/e2e/race-flow.cy.ts` (serv
   - [horse.store.ts](src/stores/horse.store.ts) — generates the horse pool with randomized condition.
   - [race.store.ts](src/stores/race.store.ts) — owns `rounds`, `currentRoundIndex`, and round lifecycle (`generateRace`, `startRound`, `pauseRound`, `nextRound`, `markHorseFinished`). Round status flows `idle → running ↔ paused → finished`. Exposes status flags (`isRunning`, `isPaused`, `isFinished`) derived from the current round's status, plus `isRaceFinished` (true once every round is finished).
   - [locale.store.ts](src/stores/locale.store.ts) — owns the active `locale` and exposes `setLocale` plus `localeOptions` (translated `{ value, label }` pairs derived from `SUPPORTED_LOCALES`). A watcher syncs the active locale into `i18n.global.locale`, `localStorage`, and `<html lang>`.
-- Domain types live in [src/types/index.ts](src/types/index.ts) (`Horse`, `RaceHorse`, `RaceRound`, `RaceRoundStatus`).
+- Domain types live in [src/types/index.ts](src/types/index.ts) (`Horse`, `RaceHorse`, `RaceRound`, `RaceRoundStatus`, `SelectOption`).
 - Constants live in [src/constants/](src/constants/) (`horse.constants.ts`, `race.constants.ts`) — keep magic values (horse roster, race distances, easings, horses-per-round) here, not inline.
 - Utilities live in [src/utils/](src/utils/) (`array.ts`, `random.ts`, `race.ts`, `time.ts`). `race.ts#getRaceHorses` is where per-horse animation `duration`/`easing` is computed from condition + distance.
 - Components are organized by role under [src/components/](src/components/): `Header/`, `Sections/`, `Cards/`, `Button/`, `Item/`, `List/`, `Select/`. Filenames use `<Name>.component.vue`. Icons are SFCs under [src/assets/icons/](src/assets/icons/). [AppSelect.component.vue](src/components/Select/AppSelect.component.vue) is the shared dropdown (used by the locale switcher in `AppHeader`).
