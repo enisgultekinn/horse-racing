@@ -1,7 +1,7 @@
 <template>
   <div v-if="currentRound" style="padding-bottom: 1rem">
     <div class="race-info">
-      <div class="race-info__group">
+      <div class="race-info__group" role="status" aria-live="polite">
         <span class="race-info__label">{{ t('currentRace.round') }}</span>
         <span class="race-info__value">{{ currentRoundIndex + 1 }} / {{ rounds.length }}</span>
       </div>

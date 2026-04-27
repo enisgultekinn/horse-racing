@@ -36,7 +36,8 @@
     "pos": "Pos.",
     "name": "Name",
     "no": "No",
-    "empty": "No race program found."
+    "empty": "No race program found.",
+    "currentlyRunning": "Currently running."
   },
   "results": {
     "roundTitle": "{round}. Round - {distance}m",

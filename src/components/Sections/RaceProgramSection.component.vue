@@ -10,8 +10,14 @@
       }"
     >
       <div class="race-program__round-title">
-        <span>{{ t('raceProgram.roundTitle', { round: round.round, distance: round.distance }) }}</span>
-        <span v-if="round.status === 'running'" class="race-program__pulse" />
+        <span>{{
+          t('raceProgram.roundTitle', { round: round.round, distance: round.distance })
+        }}</span>
+        <span
+          v-if="round.status === 'running'"
+          class="race-program__pulse"
+          :aria-label="t('raceProgram.currentlyRunning')"
+        />
       </div>
       <div class="race-program__header">
         <span>{{ t('raceProgram.pos') }}</span>

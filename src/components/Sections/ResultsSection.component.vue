@@ -1,7 +1,15 @@
 <template>
-  <div v-if="finishedRounds.length > 0" class="results">
+  <div
+    v-if="finishedRounds.length > 0"
+    class="results"
+    role="region"
+    aria-live="polite"
+    :aria-label="t('results.ariaLabel')"
+  >
     <div v-for="round in finishedRounds" :key="round._id" class="results__round">
-      <div class="results__round-title">{{ t('results.roundTitle', { round: round.round, distance: round.distance }) }}</div>
+      <div class="results__round-title">
+        {{ t('results.roundTitle', { round: round.round, distance: round.distance }) }}
+      </div>
       <div class="results__header">
         <span>{{ t('results.pos') }}</span>
         <span>{{ t('results.name') }}</span>

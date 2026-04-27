@@ -36,7 +36,8 @@
     "pos": "Sıra",
     "name": "İsim",
     "no": "No",
-    "empty": "Yarış programı bulunamadı."
+    "empty": "Yarış programı bulunamadı.",
+    "currentlyRunning": "Şu an yarışıyor."
   },
   "results": {
     "roundTitle": "{round}. Tur - {distance}m",

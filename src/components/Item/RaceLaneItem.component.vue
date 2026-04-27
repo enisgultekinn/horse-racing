@@ -1,5 +1,5 @@
 <template>
-  <div class="race-lane">
+  <div class="race-lane" role="listitem" :aria-label="`Lane ${index + 1}, ${horse.name}`">
     <span class="race-lane__number">{{ index + 1 }}</span>
     <div class="race-lane__track">
       <div
