@@ -88,6 +88,11 @@ function generateRace() {
     flex-direction: row;
     align-items: center;
     gap: 0.75rem;
+
+    @include respond-to(md) {
+      gap: 0.5rem;
+      flex-direction: column-reverse;
+    }
   }
 }
 </style>
