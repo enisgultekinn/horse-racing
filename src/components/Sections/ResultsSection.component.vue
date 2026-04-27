@@ -29,9 +29,6 @@ import { computed } from 'vue'
 //stores
 import { useRaceStore } from '@/stores/race.store'
 
-//types
-import type { RaceHorse } from '@/types'
-
 //utils
 import { formatRaceTime } from '@/utils/time'
 
@@ -47,9 +44,7 @@ const finishedRounds = computed(() =>
     .filter((round) => round.results.length > 0)
     .map((round) => ({
       ...round,
-      finishedHorses: round.results
-        .map((id) => round.horses.find((h) => h._id === id))
-        .filter((h): h is RaceHorse => !!h),
+      finishedHorses: round.results.map((id) => round.horses.find((horse) => horse._id === id)),
     }))
     .reverse(),
 )
