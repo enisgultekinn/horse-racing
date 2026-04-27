@@ -10,13 +10,13 @@
       }"
     >
       <div class="race-program__round-title">
-        <span>{{ round.round }}. Round - {{ round.distance }}m</span>
+        <span>{{ t('raceProgram.roundTitle', { round: round.round, distance: round.distance }) }}</span>
         <span v-if="round.status === 'running'" class="race-program__pulse" />
       </div>
       <div class="race-program__header">
-        <span>Pos.</span>
-        <span>Name</span>
-        <span>No</span>
+        <span>{{ t('raceProgram.pos') }}</span>
+        <span>{{ t('raceProgram.name') }}</span>
+        <span>{{ t('raceProgram.no') }}</span>
       </div>
       <div v-for="(horse, index) in round.horses" :key="horse._id" class="race-program__item">
         <span>{{ index + 1 }}</span>
@@ -29,19 +29,22 @@
     </div>
   </div>
   <div v-else style="padding-bottom: 1rem">
-    <EmptyList message="No race program found." />
+    <EmptyList :message="t('raceProgram.empty')" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { nextTick, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 //stores
 import { useRaceStore } from '@/stores/race.store'
 
 //components
 import EmptyList from '@/components/List/EmptyList.component.vue'
+
+const { t } = useI18n()
 
 const raceStore = useRaceStore()
 

@@ -1,9 +1,9 @@
 <template>
   <div v-if="horses.length > 0" class="horse-list">
     <div class="horse-list__header">
-      <span>No.</span>
-      <span>Name</span>
-      <span>Condition</span>
+      <span>{{ t('horseList.no') }}</span>
+      <span>{{ t('horseList.name') }}</span>
+      <span>{{ t('horseList.condition') }}</span>
     </div>
     <div class="horse-list__item" v-for="horse in horses" :key="horse._id">
       <span>{{ horse._id }}</span>
@@ -15,18 +15,21 @@
     </div>
   </div>
   <div v-else style="padding-bottom: 1rem">
-    <EmptyList message="No horses found." />
+    <EmptyList :message="t('horseList.empty')" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 //components
 import EmptyList from '@/components/List/EmptyList.component.vue'
 
 //stores
 import { useHorseStore } from '@/stores/horse.store'
+
+const { t } = useI18n()
 
 const horseStore = useHorseStore()
 

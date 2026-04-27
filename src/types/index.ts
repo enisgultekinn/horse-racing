@@ -21,3 +21,8 @@ export interface RaceRound {
 }
 
 export type RaceRoundStatus = 'idle' | 'paused' | 'running' | 'finished'
+
+export interface SelectOption {
+  value: string | number
+  label: string
+}

@@ -1,11 +1,11 @@
 <template>
   <div v-if="finishedRounds.length > 0" class="results">
     <div v-for="round in finishedRounds" :key="round._id" class="results__round">
-      <div class="results__round-title">{{ round.round }}. Round - {{ round.distance }}m</div>
+      <div class="results__round-title">{{ t('results.roundTitle', { round: round.round, distance: round.distance }) }}</div>
       <div class="results__header">
-        <span>Pos.</span>
-        <span>Name</span>
-        <span>Time</span>
+        <span>{{ t('results.pos') }}</span>
+        <span>{{ t('results.name') }}</span>
+        <span>{{ t('results.time') }}</span>
       </div>
       <div v-for="(horse, index) in round.finishedHorses" :key="horse._id" class="results__item">
         <span class="results__position">{{ index + 1 }}</span>
@@ -18,13 +18,14 @@
     </div>
   </div>
   <div v-else style="padding-bottom: 1rem">
-    <EmptyList message="No results found." />
+    <EmptyList :message="t('results.empty')" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 //stores
 import { useRaceStore } from '@/stores/race.store'
@@ -37,6 +38,8 @@ import type { RaceHorse } from '@/types'
 
 //components
 import EmptyList from '@/components/List/EmptyList.component.vue'
+
+const { t } = useI18n()
 
 const raceStore = useRaceStore()
 

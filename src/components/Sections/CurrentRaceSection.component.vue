@@ -2,15 +2,15 @@
   <div v-if="currentRound" style="padding-bottom: 1rem">
     <div class="race-info">
       <div class="race-info__group">
-        <span class="race-info__label">Round</span>
+        <span class="race-info__label">{{ t('currentRace.round') }}</span>
         <span class="race-info__value">{{ currentRoundIndex + 1 }} / {{ rounds.length }}</span>
       </div>
       <div class="race-info__group">
-        <span class="race-info__label">Distance</span>
+        <span class="race-info__label">{{ t('currentRace.distance') }}</span>
         <span class="race-info__value">{{ currentRound.distance }}m</span>
       </div>
       <div class="race-info__group">
-        <span class="race-info__label">Horses</span>
+        <span class="race-info__label">{{ t('currentRace.horses') }}</span>
         <span class="race-info__value"
           >{{ currentRound.horses.length }} / {{ HORSES_PER_ROUND }}</span
         >
@@ -38,21 +38,20 @@
         :is-finished="isFinished"
       />
       <span class="race-progress__finish">
-        <span class="race-progress__finish-text">Finish</span>
+        <span class="race-progress__finish-text">{{ t('currentRace.finish') }}</span>
         <span class="race-progress__finish-line" />
       </span>
     </div>
   </div>
   <div v-else style="padding-bottom: 1rem">
-    <EmptyList
-      message="No race in progress. You can start a new race by clicking the 'Generate Race' button."
-    />
+    <EmptyList :message="t('currentRace.empty')" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 //components
 import AppButton from '@/components/Button/AppButton.component.vue'
@@ -65,17 +64,19 @@ import { useRaceStore } from '@/stores/race.store'
 //constants
 import { HORSES_PER_ROUND } from '@/constants/race.constants'
 
+const { t } = useI18n()
+
 const raceStore = useRaceStore()
 
 const { currentRound, rounds, currentRoundIndex, isRunning, isPaused, isFinished, isRaceFinished } =
   storeToRefs(raceStore)
 
 const actionLabel = computed(() => {
-  if (isRunning.value) return 'Pause'
-  if (isPaused.value) return 'Resume'
-  if (isRaceFinished.value) return 'Finished'
-  if (isFinished.value) return `Next Round`
-  return 'Start'
+  if (isRunning.value) return t('currentRace.actions.pause')
+  if (isPaused.value) return t('currentRace.actions.resume')
+  if (isRaceFinished.value) return t('currentRace.actions.finished')
+  if (isFinished.value) return t('currentRace.actions.next')
+  return t('currentRace.actions.start')
 })
 
 function onActionClick() {
