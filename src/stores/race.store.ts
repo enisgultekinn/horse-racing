@@ -14,12 +14,15 @@ export const useRaceStore = defineStore('race', () => {
   const currentRoundIndex = ref(0)
   const currentRound = computed<RaceRound | undefined>(() => rounds.value[currentRoundIndex.value])
 
-  const isRoundActive = computed(() =>
-    rounds.value.some((round) => round.status === 'running' || round.status === 'paused'),
+  const isRunning = computed(() => currentRound.value?.status === 'running')
+  const isPaused = computed(() => currentRound.value?.status === 'paused')
+  const isFinished = computed(() => currentRound.value?.status === 'finished')
+  const isRaceFinished = computed(
+    () => rounds.value.length > 0 && rounds.value.every((r) => r.status === 'finished'),
   )
 
   function generateRace() {
-    if (isRoundActive.value) return
+    if (isRunning.value) return
 
     horseStore.generateHorses()
 
@@ -91,7 +94,10 @@ export const useRaceStore = defineStore('race', () => {
     currentRound,
     rounds,
     currentRoundIndex,
-    isRoundActive,
+    isRunning,
+    isPaused,
+    isFinished,
+    isRaceFinished,
     generateRace,
     startRound,
     pauseRound,
