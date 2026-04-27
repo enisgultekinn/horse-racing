@@ -1,6 +1,6 @@
 <template>
   <section class="section-card">
-    <span class="section-card__title">{{ title }}</span>
+    <h2 class="section-card__title">{{ title }}</h2>
     <div class="section-card__body hide-scrollbar">
       <slot />
     </div>
