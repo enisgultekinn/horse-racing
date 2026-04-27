@@ -5,7 +5,11 @@ const FULL_RACE_TIMEOUT = 40_000
 
 describe('Horse Racing', () => {
   beforeEach(() => {
-    cy.visit('/')
+    cy.visit('/', {
+      onBeforeLoad(win) {
+        win.localStorage.setItem('locale', 'en')
+      },
+    })
   })
 
   describe('initial page load', () => {
