@@ -14,7 +14,8 @@ A turn-based horse racing simulation built with Vue 3 and Vite. Each round runs 
 - [Architecture](#architecture)
   - [Application Shell](#application-shell)
   - [State Management (Pinia)](#state-management-pinia)
-  - [Domain Types](#domain-types)
+  - [Internationalization](#internationalization)
+  - [Types](#types)
   - [Constants and Utilities](#constants-and-utilities)
   - [Path Alias](#path-alias)
 - [Styling](#styling)
@@ -41,6 +42,7 @@ The page is composed of a `MainLayout` with four primary sections:
 - **Framework:** Vue 3 (Composition API, `<script setup lang="ts">`)
 - **Build:** Vite
 - **State:** Pinia (setup-store form)
+- **i18n:** Vue I18n (`legacy: false`)
 - **Language:** TypeScript
 - **Styling:** SCSS (`sass-embedded`), BEM, scoped styles
 - **Testing:** Vitest (unit), Vitest Browser Mode + Playwright (visual), Cypress (E2E)
@@ -100,10 +102,12 @@ src/
 │   ├── Header/
 │   ├── Item/
 │   ├── List/
-│   └── Sections/       # HorseListSection, CurrentRaceSection, ...
+│   ├── Sections/       # HorseListSection, CurrentRaceSection, ...
+│   └── Select/         # AppSelect (shared dropdown)
 ├── constants/          # horse.constants.ts, race.constants.ts
+├── i18n/               # index.ts, locales/ (en.json, tr.json)
 ├── layouts/            # MainLayout.vue
-├── stores/             # horse.store.ts, race.store.ts
+├── stores/             # horse.store.ts, race.store.ts, locale.store.ts
 ├── types/              # Horse, RaceHorse, RaceRound, RaceRoundStatus
 ├── utils/              # array.ts, random.ts, race.ts, time.ts
 ├── App.vue
@@ -114,7 +118,7 @@ src/
 
 ### Application Shell
 
-[src/main.ts](src/main.ts) installs Pinia, imports the global SCSS, and mounts the app on `#app`. No router is configured. [src/App.vue](src/App.vue) only renders [src/layouts/MainLayout.vue](src/layouts/MainLayout.vue); the page is composed of `SectionCard`-wrapped sections plus `AppHeader`.
+[src/main.ts](src/main.ts) installs Pinia and Vue I18n, imports the global SCSS, and mounts the app on `#app`. No router is configured. [src/App.vue](src/App.vue) only renders [src/layouts/MainLayout.vue](src/layouts/MainLayout.vue); the page is composed of `SectionCard`-wrapped sections plus `AppHeader`.
 
 ### State Management (Pinia)
 
@@ -122,10 +126,15 @@ Stores use the setup-store form `defineStore('name', () => { ... })` and follow 
 
 - [horse.store.ts](src/stores/horse.store.ts) — generates the horse pool with randomized condition.
 - [race.store.ts](src/stores/race.store.ts) — owns `rounds`, `currentRoundIndex`, and the round lifecycle (`generateRace`, `startRound`, `pauseRound`, `nextRound`, `markHorseFinished`). Exposes derived flags `isRunning`, `isPaused`, `isFinished`, and `isRaceFinished`.
+- [locale.store.ts](src/stores/locale.store.ts) — owns the active `locale` and exposes `setLocale` plus `localeOptions` (translated `{ value, label }` pairs). Syncs the active locale into `i18n.global.locale`, `localStorage`, and `<html lang>`.
+
+### Internationalization
+
+[src/i18n/index.ts](src/i18n/index.ts) creates the `vue-i18n` instance (`legacy: false`), with locale messages under [src/i18n/locales/](src/i18n/locales/) (`en.json`, `tr.json`). `SUPPORTED_LOCALES` and `DEFAULT_LOCALE` are exported from the same file; the initial locale is detected from `localStorage('locale')` then `navigator.language`, falling back to `en`. Use `t(...)` from `useI18n()` for any user-facing strings.
 
 ### Types
 
-All  types live in [src/types/index.ts](src/types/index.ts): `Horse`, `RaceHorse`, `RaceRound`, `RaceRoundStatus`.
+All types live in [src/types/index.ts](src/types/index.ts): `Horse`, `RaceHorse`, `RaceRound`, `RaceRoundStatus`.
 
 ### Constants and Utilities
 
