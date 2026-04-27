@@ -17,7 +17,7 @@ Vue 3 (Composition API, `<script setup lang="ts">`) + Vite + Pinia + TypeScript.
 - `bun lint` — ESLint with `--fix --cache`
 - `bun format` — Prettier across `src/`
 
-Single Cypress spec: `bunx cypress run --spec cypress/e2e/example.cy.ts` (server must already be running on `http://localhost:4173`).
+Single Cypress spec: `bunx cypress run --spec cypress/e2e/race-flow.cy.ts` (server must already be running on `http://localhost:4173`).
 
 ## Architecture notes
 
