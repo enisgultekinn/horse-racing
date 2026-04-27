@@ -32,6 +32,9 @@ import { useRaceStore } from '@/stores/race.store'
 //utils
 import { formatRaceTime } from '@/utils/time'
 
+//types
+import type { RaceHorse } from '@/types'
+
 //components
 import EmptyList from '@/components/List/EmptyList.component.vue'
 
@@ -44,7 +47,9 @@ const finishedRounds = computed(() =>
     .filter((round) => round.results.length > 0)
     .map((round) => ({
       ...round,
-      finishedHorses: round.results.map((id) => round.horses.find((horse) => horse._id === id)),
+      finishedHorses: round.results.map(
+        (id) => round.horses.find((horse) => horse._id === id) as RaceHorse,
+      ),
     }))
     .reverse(),
 )
