@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import RaceLaneItem from '@/components/Item/RaceLaneItem.component.vue'
 import { useRaceStore } from '@/stores/race.store'
+import { i18n } from '@/i18n'
 import type { RaceHorse } from '@/types'
 
 const baseHorse: RaceHorse = {
@@ -29,6 +30,9 @@ function mountLane(overrides: Partial<{
       isPaused: false,
       isFinished: false,
       ...overrides,
+    },
+    global: {
+      plugins: [i18n],
     },
   })
 }
@@ -93,6 +97,9 @@ describe('RaceLaneItem', () => {
         isRunning: true,
         isPaused: false,
         isFinished: false,
+      },
+      global: {
+        plugins: [i18n],
       },
     })
 
