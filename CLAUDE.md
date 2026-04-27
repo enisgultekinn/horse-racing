@@ -4,14 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Stack
 
-Vue 3 (Composition API, `<script setup lang="ts">`) + Vite + Pinia + TypeScript. Styling via SCSS (`sass-embedded`). Unit tests via Vitest, E2E via Cypress. Package manager is **bun** (see `bun.lock`).
+Vue 3 (Composition API, `<script setup lang="ts">`) + Vite + Pinia + TypeScript. Styling via SCSS (`sass-embedded`). Unit tests via Vitest (jsdom), visual regression tests via Vitest Browser Mode + Playwright (Chromium), E2E via Cypress. Package manager is **bun** (see `bun.lock`).
 
 ## Commands
 
 - `bun dev` — Vite dev server with HMR
 - `bun run build` — runs `type-check` (via `vue-tsc --build`) and `build-only` (Vite build) in parallel
 - `bun run type-check` — type-check only, no emit
-- `bun test:unit` — Vitest (watch mode by default; pass `--run` for single-shot, or a path/name pattern to filter)
+- `bun test:unit` — Vitest (watch mode by default; pass `--run` for single-shot, or a path/name pattern to filter). Excludes `*.visual.test.ts`.
+- `bun test:visual` — Vitest Browser Mode (Playwright/Chromium, headless). Compares component renders against committed PNG baselines under `src/components/__tests__/__screenshots__/`.
+- `bun test:visual:update` — re-seed baselines (run after intentional UI changes; review the diff before committing).
 - `bun test:e2e:dev` — Cypress against the Vite dev server (fast, for local iteration)
 - `bun test:e2e` — Cypress against `vite preview` of a production build (run `bun run build` first; this is what CI should use)
 - `bun lint` — ESLint with `--fix --cache`
@@ -33,6 +35,7 @@ Single Cypress spec: `bunx cypress run --spec cypress/e2e/race-flow.cy.ts` (serv
 - Path alias: `@/*` → `./src/*` (configured in both [vite.config.ts](vite.config.ts) and [tsconfig.app.json](tsconfig.app.json)). Prefer `@/...` imports over long relative paths.
 - TS config is split: `tsconfig.app.json` for app code (excludes `__tests__`), `tsconfig.vitest.json` for unit tests, `tsconfig.node.json` for build tooling. `noUncheckedIndexedAccess` is on — array/object index access returns `T | undefined`, handle accordingly.
 - Tests colocate under `src/**/__tests__/` (excluded from the app tsconfig; picked up by Vitest). Unit tests cover utils ([src/utils/__tests__/](src/utils/__tests__/)), Pinia stores ([src/stores/__tests__/](src/stores/__tests__/)), and components ([src/components/__tests__/](src/components/__tests__/)). Component tests use `@vue/test-utils` `mount` and reset Pinia per test via `setActivePinia(createPinia())` in a `beforeEach`. Test files are named `<name>.test.ts`.
+- Visual regression tests are named `<name>.visual.test.ts` (same `__tests__/` folders) and run under Vitest Browser Mode via [vitest.visual.config.ts](vitest.visual.config.ts) (Chromium, viewport 1280×1400). They use the [renderAt](src/__tests__/visual.helpers.ts) helper, which mounts a component into a `data-testid`-tagged host `<div>` on `document.body` and returns a typed `Locator` via `page.getByTestId(...)`. Assert with `await expect(locator.getByRole(...)).toMatchScreenshot('<name>')` (or `.getByText(...)` / the host locator itself). Comparator is `pixelmatch` with `allowedMismatchedPixelRatio: 0.01`. Baselines live next to the spec under `__screenshots__/<spec>.ts/<name>-chromium-darwin.png` and are **gitignored** (`__screenshots__/` in [.gitignore](.gitignore)) — they're regenerated locally with `bun test:visual:update` rather than committed, so visual tests are a local-only safety net (not enforced in CI as currently configured). Shared setup lives in [src/__tests__/visual.setup.ts](src/__tests__/visual.setup.ts) (loads `main.scss`, clears `document.body` between tests). The unit `vitest.config.ts` excludes `**/*.visual.test.ts` so `bun test:unit` does not pick them up. For Pinia-backed components, set state directly (e.g. `race.rounds = [makeRound('running')]`) instead of calling `generateRace()` — store actions pull random data and would make baselines flaky.
 
 ## Styling
 
