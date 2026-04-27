@@ -61,18 +61,15 @@ import EmptyList from '@/components/List/EmptyList.component.vue'
 
 //stores
 import { useRaceStore } from '@/stores/race.store'
+
+//constants
 import { HORSES_PER_ROUND } from '@/constants/race.constants'
 
 const raceStore = useRaceStore()
 
-const { currentRound, rounds, currentRoundIndex } = storeToRefs(raceStore)
+const { currentRound, rounds, currentRoundIndex, isRunning, isPaused, isFinished, isRaceFinished } =
+  storeToRefs(raceStore)
 
-const isRunning = computed(() => currentRound.value?.status === 'running')
-const isPaused = computed(() => currentRound.value?.status === 'paused')
-const isFinished = computed(() => currentRound.value?.status === 'finished')
-const isRaceFinished = computed(
-  () => rounds.value.length > 0 && rounds.value.every((r) => r.status === 'finished'),
-)
 const actionLabel = computed(() => {
   if (isRunning.value) return 'Pause'
   if (isPaused.value) return 'Resume'

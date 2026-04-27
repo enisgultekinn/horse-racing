@@ -5,7 +5,7 @@
       <h1 class="app-header__title">Horse Racing</h1>
     </div>
 
-    <AppButton variant="primary" size="md" :disabled="isRoundActive" @click="generateRace">
+    <AppButton variant="primary" size="md" :disabled="isRunning" @click="generateRace">
       Generate Race
     </AppButton>
   </header>
@@ -22,7 +22,7 @@ import { useRaceStore } from '@/stores/race.store'
 
 const raceStore = useRaceStore()
 
-const { isRoundActive } = storeToRefs(raceStore)
+const { isRunning } = storeToRefs(raceStore)
 
 function generateRace() {
   raceStore.generateRace()
