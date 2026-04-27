@@ -23,6 +23,8 @@
     "horses": "At Sayısı",
     "finish": "Bitiş",
     "empty": "Devam eden bir yarış yok. 'Yarış Oluştur' butonuna tıklayarak yeni bir yarış başlatabilirsiniz.",
+    "lanesLabel": "Yarış kulvarları",
+    "laneAriaLabel": "{lane}. kulvar, {name}",
     "actions": {
       "start": "Başlat",
       "pause": "Duraklat",
@@ -44,7 +46,8 @@
     "pos": "Sıra",
     "name": "İsim",
     "time": "Süre",
-    "empty": "Sonuç bulunamadı."
+    "empty": "Sonuç bulunamadı.",
+    "ariaLabel": "Yarış sonuçları"
   },
   "language": {
     "label": "Dil",

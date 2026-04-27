@@ -26,7 +26,7 @@
         </AppButton>
       </div>
     </div>
-    <div class="race-progress">
+    <div class="race-progress" role="list" :aria-label="t('currentRace.lanesLabel')">
       <RaceLaneItem
         v-for="(horse, index) in currentRound.horses"
         :key="currentRound._id + '-' + horse._id"

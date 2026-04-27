@@ -23,6 +23,8 @@
     "horses": "Horses",
     "finish": "Finish",
     "empty": "No race in progress. You can start a new race by clicking the 'Generate Race' button.",
+    "lanesLabel": "Race lanes",
+    "laneAriaLabel": "Lane {lane}, {name}",
     "actions": {
       "start": "Start",
       "pause": "Pause",
@@ -44,7 +46,8 @@
     "pos": "Pos.",
     "name": "Name",
     "time": "Time",
-    "empty": "No results found."
+    "empty": "No results found.",
+    "ariaLabel": "Race results"
   },
   "language": {
     "label": "Language",

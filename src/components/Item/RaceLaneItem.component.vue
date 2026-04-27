@@ -1,5 +1,9 @@
 <template>
-  <div class="race-lane" role="listitem" :aria-label="`Lane ${index + 1}, ${horse.name}`">
+  <div
+    class="race-lane"
+    role="listitem"
+    :aria-label="t('currentRace.laneAriaLabel', { lane: index + 1, name: horse.name })"
+  >
     <span class="race-lane__number">{{ index + 1 }}</span>
     <div class="race-lane__track">
       <div
@@ -21,6 +25,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
 //icons
 import IconHorse from '@/assets/icons/IconHorse.vue'
 
@@ -36,6 +42,8 @@ const props = defineProps<{
   isPaused: boolean
   isFinished: boolean
 }>()
+
+const { t } = useI18n()
 
 const raceStore = useRaceStore()
 
