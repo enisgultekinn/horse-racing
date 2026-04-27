@@ -1,0 +1,53 @@
+{
+  "app": {
+    "title": "At Yarışı"
+  },
+  "header": {
+    "generateRace": "Yarış Oluştur"
+  },
+  "sections": {
+    "horseList": "At Listesi ({count})",
+    "currentRace": "Mevcut Yarış",
+    "raceProgram": "Yarış Programı",
+    "results": "Sonuçlar"
+  },
+  "horseList": {
+    "no": "No.",
+    "name": "İsim",
+    "condition": "Form",
+    "empty": "At bulunamadı."
+  },
+  "currentRace": {
+    "round": "Tur",
+    "distance": "Mesafe",
+    "horses": "At Sayısı",
+    "finish": "Bitiş",
+    "empty": "Devam eden bir yarış yok. 'Yarış Oluştur' butonuna tıklayarak yeni bir yarış başlatabilirsiniz.",
+    "actions": {
+      "start": "Başlat",
+      "pause": "Duraklat",
+      "resume": "Devam Et",
+      "next": "Sonraki Tur",
+      "finished": "Tamamlandı"
+    }
+  },
+  "raceProgram": {
+    "roundTitle": "{round}. Tur - {distance}m",
+    "pos": "Sıra",
+    "name": "İsim",
+    "no": "No",
+    "empty": "Yarış programı bulunamadı."
+  },
+  "results": {
+    "roundTitle": "{round}. Tur - {distance}m",
+    "pos": "Sıra",
+    "name": "İsim",
+    "time": "Süre",
+    "empty": "Sonuç bulunamadı."
+  },
+  "language": {
+    "label": "Dil",
+    "tr": "Türkçe",
+    "en": "English"
+  }
+}

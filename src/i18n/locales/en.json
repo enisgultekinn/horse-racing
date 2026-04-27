@@ -1,0 +1,53 @@
+{
+  "app": {
+    "title": "Horse Racing"
+  },
+  "header": {
+    "generateRace": "Generate Race"
+  },
+  "sections": {
+    "horseList": "Horse List ({count})",
+    "currentRace": "Current Race",
+    "raceProgram": "Race Program",
+    "results": "Results"
+  },
+  "horseList": {
+    "no": "No.",
+    "name": "Name",
+    "condition": "Condition",
+    "empty": "No horses found."
+  },
+  "currentRace": {
+    "round": "Round",
+    "distance": "Distance",
+    "horses": "Horses",
+    "finish": "Finish",
+    "empty": "No race in progress. You can start a new race by clicking the 'Generate Race' button.",
+    "actions": {
+      "start": "Start",
+      "pause": "Pause",
+      "resume": "Resume",
+      "next": "Next Round",
+      "finished": "Finished"
+    }
+  },
+  "raceProgram": {
+    "roundTitle": "{round}. Round - {distance}m",
+    "pos": "Pos.",
+    "name": "Name",
+    "no": "No",
+    "empty": "No race program found."
+  },
+  "results": {
+    "roundTitle": "{round}. Round - {distance}m",
+    "pos": "Pos.",
+    "name": "Name",
+    "time": "Time",
+    "empty": "No results found."
+  },
+  "language": {
+    "label": "Language",
+    "tr": "Türkçe",
+    "en": "English"
+  }
+}
