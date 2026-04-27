@@ -108,7 +108,7 @@ src/
 ├── i18n/               # index.ts, locales/ (en.json, tr.json)
 ├── layouts/            # MainLayout.vue
 ├── stores/             # horse.store.ts, race.store.ts, locale.store.ts
-├── types/              # Horse, RaceHorse, RaceRound, RaceRoundStatus
+├── types/              # Horse, RaceHorse, RaceRound, RaceRoundStatus, SelectOption
 ├── utils/              # array.ts, random.ts, race.ts, time.ts
 ├── App.vue
 └── main.ts
@@ -134,7 +134,7 @@ Stores use the setup-store form `defineStore('name', () => { ... })` and follow 
 
 ### Types
 
-All types live in [src/types/index.ts](src/types/index.ts): `Horse`, `RaceHorse`, `RaceRound`, `RaceRoundStatus`.
+All types live in [src/types/index.ts](src/types/index.ts): `Horse`, `RaceHorse`, `RaceRound`, `RaceRoundStatus`, `SelectOption`.
 
 ### Constants and Utilities
 
